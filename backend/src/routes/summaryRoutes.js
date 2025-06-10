@@ -1,5 +1,5 @@
 import express from 'express';
-import { summarizeVideo } from '../controllers/summaryController.js';
+import { summarizeVideo } from '../controllers/summaryControllers.js';
 import { protect } from '../middleware/auth.js';
 
 const router = express.Router();
