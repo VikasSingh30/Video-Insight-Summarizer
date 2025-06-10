@@ -1,0 +1,30 @@
+# Node modules
+# node_modules/
+
+# Environment variables
+.env
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+
+# OS & IDE files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Runtime
+dist/
+build/
+.cache/
+
+# Gitpod
+.gitpod/
+
+# Coverage (for testing)
+coverage/
+
+# Misc
+*.swp
