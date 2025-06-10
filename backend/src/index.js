@@ -6,6 +6,7 @@ import authRoutes from '../src/routes/authRoutes.js';
 import youtubeRoutes from '../src/routes/youtubeRoutes.js';
 import summaryRoutes from '../src/routes/summaryRoutes.js';
 import paddleRoutes from './routes/paddleRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 
 
 
@@ -20,6 +21,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/youtube', youtubeRoutes);
 app.use('/api/summary', summaryRoutes);
 app.use('/api/paddle', paddleRoutes);
+app.use('/api/admin', adminRoutes);
 
 
 app.get('/health', (req, res) => {
