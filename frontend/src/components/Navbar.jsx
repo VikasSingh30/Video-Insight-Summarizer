@@ -19,16 +19,14 @@ const Navbar = () => {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/login');
   };
 
   const handleUpgrade = () => {
     navigate('/upgrade');
   };
 
-  const isActiveRoute = (path) => {
-    return location.pathname === path;
-  };
+  const isActiveRoute = (path) => location.pathname === path;
 
   return (
     <header className="bg-white shadow-sm border-b border-gray-200">
@@ -41,35 +39,37 @@ const Navbar = () => {
             <h1 className="text-xl font-bold text-gray-900">Video Insight</h1>
           </div>
 
-          <nav className="hidden md:flex items-center gap-6">
-            <Link
-              to="/home"
-              className={`px-3 py-2 rounded-md font-medium transition-colors ${
-                isActiveRoute('/home') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600'
-              }`}
-            >
-              Summarize
-            </Link>
-            <Link
-              to="/dashboard"
-              className={`px-3 py-2 rounded-md font-medium transition-colors ${
-                isActiveRoute('/dashboard') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600'
-              }`}
-            >
-              History
-            </Link>
-            {user?.isAdmin && (
+          {user && (
+            <nav className="hidden md:flex items-center gap-6">
               <Link
-                to="/admin"
-                className={`px-3 py-2 rounded-md font-medium transition-colors flex items-center gap-1 ${
-                  isActiveRoute('/admin') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600'
+                to="/"
+                className={`px-3 py-2 rounded-md font-medium transition-colors ${
+                  isActiveRoute('/') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600'
                 }`}
               >
-                <Shield className="w-4 h-4" />
-                Admin
+                Summarize
               </Link>
-            )}
-          </nav>
+              <Link
+                to="/summary"
+                className={`px-3 py-2 rounded-md font-medium transition-colors ${
+                  isActiveRoute('/summary') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600'
+                }`}
+              >
+                History
+              </Link>
+              {user.isAdmin && (
+                <Link
+                  to="/admin"
+                  className={`px-3 py-2 rounded-md font-medium transition-colors flex items-center gap-1 ${
+                    isActiveRoute('/admin') ? 'text-purple-600 bg-purple-50' : 'text-gray-700 hover:text-purple-600'
+                  }`}
+                >
+                  <Shield className="w-4 h-4" />
+                  Admin
+                </Link>
+              )}
+            </nav>
+          )}
 
           <div className="flex items-center gap-4">
             {!user?.isPremium && (
@@ -78,7 +78,7 @@ const Navbar = () => {
                 <span>{dailyCount}/3 daily summaries</span>
               </div>
             )}
-            
+
             {!user?.isPremium && (
               <button
                 onClick={handleUpgrade}
@@ -96,18 +96,20 @@ const Navbar = () => {
               </div>
             )}
 
-            <div className="flex items-center gap-2">
-              <div className="hidden sm:block text-right">
-                <p className="text-sm font-medium text-gray-900">{user?.name}</p>
-                <p className="text-xs text-gray-500">{user?.email}</p>
+            {user && (
+              <div className="flex items-center gap-2">
+                <div className="hidden sm:block text-right">
+                  <p className="text-sm font-medium text-gray-900">{user.name}</p>
+                  <p className="text-xs text-gray-500">{user.email}</p>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
+                >
+                  <LogOut className="w-5 h-5" />
+                </button>
               </div>
-              <button
-                onClick={handleLogout}
-                className="p-2 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors"
-              >
-                <LogOut className="w-5 h-5" />
-              </button>
-            </div>
+            )}
 
             <button
               onClick={() => setShowMobileMenu(!showMobileMenu)}
@@ -118,18 +120,18 @@ const Navbar = () => {
           </div>
         </div>
 
-        {showMobileMenu && (
+        {showMobileMenu && user && (
           <div className="md:hidden py-4 border-t border-gray-200">
             <nav className="flex flex-col gap-2">
               <Link
-                to="/home"
+                to="/"
                 onClick={() => setShowMobileMenu(false)}
                 className="text-left px-3 py-2 rounded-md font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50"
               >
                 Summarize
               </Link>
               <Link
-                to="/dashboard"
+                to="/summary"
                 onClick={() => setShowMobileMenu(false)}
                 className="text-left px-3 py-2 rounded-md font-medium text-gray-700 hover:text-purple-600 hover:bg-purple-50"
               >
