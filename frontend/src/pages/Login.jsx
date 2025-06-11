@@ -93,6 +93,9 @@ const Login = () => {
         <div className="mt-4 text-center text-sm text-gray-500">
           <p className="font-semibold">Try the App:</p>
           <p>Sign up with any email to explore features.</p>
+          <p>Demo credentials:</p>
+          <p>Regular user: any email</p>
+          <p>Admin: admin@example.com</p>
 
         </div>
       </div>
