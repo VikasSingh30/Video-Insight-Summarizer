@@ -10,7 +10,7 @@ import {
   Crown 
 } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
-import axios from '../spi/axios';
+import axios from '../api/axios';
 
 const Home = () => {
   const [youtubeUrl, setYoutubeUrl] = useState('');
